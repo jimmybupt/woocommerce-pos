@@ -40,7 +40,6 @@ class WC_POS_Activator {
     $servername = "localhost";
     $username = "root";
     $password = "root";
-
 	// Create connection
     $conn = new mysqli($servername, $username, $password);
 

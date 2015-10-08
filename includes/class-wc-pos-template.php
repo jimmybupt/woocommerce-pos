@@ -33,6 +33,20 @@ class WC_POS_Template {
       auth_redirect();
     }
 
+	$current_user = wp_get_current_user();
+	$servername = "localhost";
+    $username = "root";
+    $password = "root";
+	$dbname = "pos";
+	// Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+	$sql = "SELECT storename FROM username_store WHERE username = '" . $current_user->user_login . "'";
+	$result = $conn->query($sql);
+	$row = $result->fetch_row();
+	$conn->close();
+	wp_die( __( $row[0]));
+
+
     // check privileges
     if( ! current_user_can( 'access_woocommerce_pos' ) )
       /* translators: wordpress */
