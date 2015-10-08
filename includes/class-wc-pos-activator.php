@@ -145,7 +145,7 @@ class WC_POS_Activator {
    * shop_manager roles
    */
   private function add_pos_capability(){
-    $roles = array('administrator', 'shop_manager');
+    $roles = array('administrator', 'shop_manager', 'subscriber');
     $caps = array('manage_woocommerce_pos', 'access_woocommerce_pos');
     foreach($roles as $slug) :
       $role = get_role($slug);
