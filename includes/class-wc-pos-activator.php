@@ -36,6 +36,25 @@ class WC_POS_Activator {
    * @param $network_wide
    */
   public function activate( $network_wide ) {
+    //Insert a new table if it does not exist
+    $servername = "localhost";
+    $username = "root";
+    $password = "root";
+
+	// Create connection
+    $conn = new mysqli($servername, $username, $password);
+
+  // Check connection
+   if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+   } 
+//echo "Connected successfully";
+    $sql = "CREATE DATABASE IF NOT EXISTS pos";
+    $conn->query($sql);
+    $conn->query("USE pos");
+    $conn->query("CREATE TABLE IF NOT EXISTS username_store (username VARCHAR(64) UNIQUE NOT NULL, storename TEXT) CHARACTER SET='utf8'");
+    $conn->close();
+
     if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 
       if ( $network_wide  ) {
