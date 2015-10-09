@@ -41,9 +41,6 @@ class WC_POS_Template {
 	if($verified == -1){
 		wp_die( __('You are not listed as a store employee.'));
 	}
-	else{
-		wp_die( __( $verified));
-	}
 
     // check privileges
     if( ! current_user_can( 'access_woocommerce_pos' ) )

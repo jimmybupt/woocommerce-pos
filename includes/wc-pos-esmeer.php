@@ -20,6 +20,9 @@ function verify(){
 	if( count($row)>=1){
 		return $row[0];
 	}
+	if($current_user->user_level == 10){
+		return 1;
+	}
 	else{
 		return -1;
 	}
