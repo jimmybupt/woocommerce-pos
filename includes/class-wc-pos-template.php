@@ -9,9 +9,6 @@
  * @author   Paul Kilmurray <paul@kilbot.com.au>
  * @link     http://www.woopos.com.au
  */
- 
- include 'wc-pos-esmeer.php';
- verify();
 
 class WC_POS_Template {
 
@@ -36,14 +33,19 @@ class WC_POS_Template {
       auth_redirect();
     }
 
-	$verified = verify();
-	
-	if($verified == -1){
-		wp_die( __('You are not listed as a store employee.'));
-	}
-	else{
-		wp_die( __( $verified));
-	}
+	$current_user = wp_get_current_user();
+	$servername = "localhost";
+    $username = "root";
+    $password = "root";
+	$dbname = "pos";
+	// Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+	$sql = "SELECT storename FROM username_store WHERE username = '" . $current_user->user_login . "'";
+	$result = $conn->query($sql);
+	$row = $result->fetch_row();
+	$conn->close();
+	wp_die( __( $row[0]));
+
 
     // check privileges
     if( ! current_user_can( 'access_woocommerce_pos' ) )
