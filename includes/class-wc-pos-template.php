@@ -167,27 +167,32 @@ class WC_POS_Template {
       'products' => array(
         /* translators: woocommerce */
         'label'  => __( 'Products', 'woocommerce' ),
-        'href'   => admin_url('edit.php?post_type=product')
+        'href'   => '#products'
       ),
       'orders' => array(
         /* translators: woocommerce */
         'label'  => __( 'Orders', 'woocommerce' ),
-        'href'   => admin_url('edit.php?post_type=shop_order')
+        'href'   => '#orders'
       ),
       'customers' => array(
         /* translators: woocommerce */
         'label'  => __( 'Customers', 'woocommerce' ),
-        'href'   => admin_url('users.php')
+        'href'   => '#customers'
       ),
       'coupons' => array(
         /* translators: woocommerce */
         'label' => __( 'Coupons', 'woocommerce' ),
-        'href'   => admin_url('edit.php?post_type=shop_coupon')
+        'href'   => '#coupons'
       ),
       'support' => array(
         /* translators: woocommerce */
         'label'  => __( 'Support', 'woocommerce' ),
         'href'   => '#support'
+      ),
+	  'stores' => array(
+        /* translators: woocommerce */
+        'label'  => __( 'Stores', 'woocommerce' ),
+        'href'   => '#stores'
       )
     );
 
