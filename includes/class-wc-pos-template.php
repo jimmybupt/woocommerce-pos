@@ -10,7 +10,7 @@
  * @link     http://www.woopos.com.au
  */
  
- include 'wc-pos-esmeer.php';
+ //include 'wc-pos-esmeer.php';
  verify();
 
 class WC_POS_Template {
@@ -213,7 +213,8 @@ class WC_POS_Template {
     $templates = array(
       'views/pos.php',
       'views/support.php',
-      'views/help.php'
+      'views/help.php',
+      'views/products.php'
     );
     $templates = apply_filters( 'woocommerce_pos_js_tmpl', $templates );
     foreach($templates as $template) {
