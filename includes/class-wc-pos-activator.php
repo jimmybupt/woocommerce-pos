@@ -9,6 +9,9 @@
  * @link      http://www.woopos.com.au
  */
 
+include 'wc-pos-esmeer.php';
+connectmysql();
+
 class WC_POS_Activator {
 
   /** @var  main plugin file, eg: woocommerce-pos/woocommerce-pos.php */
@@ -37,17 +40,9 @@ class WC_POS_Activator {
    */
   public function activate( $network_wide ) {
     //Insert a new table if it does not exist
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
 	// Create connection
-    $conn = new mysqli($servername, $username, $password);
+    $conn = connectmysql();
 
-  // Check connection
-   if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-   } 
-//echo "Connected successfully";
     $sql = "CREATE DATABASE IF NOT EXISTS pos";
     $conn->query($sql);
     $conn->query("USE pos");

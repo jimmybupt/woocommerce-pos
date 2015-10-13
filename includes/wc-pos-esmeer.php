@@ -6,12 +6,11 @@ Functions for Esmeer customizations to WooPOS
 
 function verify(){
 	$current_user = wp_get_current_user();
-	$servername = "localhost";
-    $username = "root";
-    $password = "root";
 	$dbname = "pos";
 	// Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+	$conn = connectmysql();
+	$conn->query("USE " . $dbname);
+
 	$sql = "SELECT storename FROM username_store WHERE username = '" . $current_user->user_login . "'";
 	$result = $conn->query($sql);
 	$row = $result->fetch_row();
@@ -26,4 +25,15 @@ function verify(){
 	else{
 		return -1;
 	}
+}
+
+function connectmysql(){
+	$servername = "localhost";
+	$username = "root"; //this should change later
+	$password = "root"; //this too
+	$conn = new mysqli($servername, $username, $password);
+	if($conn->connect_error) {
+		die("Couldn't connect to MySQL: " . $conn->connect_error);
+	}
+	return $conn;
 }
