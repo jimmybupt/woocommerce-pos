@@ -213,8 +213,7 @@ class WC_POS_Template {
     $templates = array(
       'views/pos.php',
       'views/support.php',
-      'views/help.php',
-      'views/products.php'
+      'views/help.php'
     );
     $templates = apply_filters( 'woocommerce_pos_js_tmpl', $templates );
     foreach($templates as $template) {

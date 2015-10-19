@@ -353,7 +353,6 @@ class WC_POS_API_Products extends WC_POS_API_Abstract {
       }
 
     }
-
     return $where;
   }
 
@@ -363,12 +362,32 @@ class WC_POS_API_Products extends WC_POS_API_Abstract {
    * @return array
    */
   static public function get_ids($updated_at_min){
-    $args = array(
-      'post_type'     => array('product'),
-      'post_status'   => array('publish'),
-      'posts_per_page'=>  -1,
-      'fields'        => 'ids'
-    );
+  $store_name = verify();
+  if($store_name != 1){
+	  $term_ids = get_terms('product_cat',array('fields' => 'ids', 'search' => $store_name));
+	  //echo $term_ids[0];
+	  $args = array(
+		  'post_type'     => array('product'),
+		  'post_status'   => array('publish'),
+		  'tax_query' => array(
+								array(
+										'taxonomy' => 'product_cat',
+										'field'    => 'term_id',
+										'terms'    => $term_ids,
+									),
+								),
+		  'posts_per_page'=>  -1,
+		  'fields'        => 'ids'
+		);
+	}
+	else {
+		$args = array(
+		  'post_type'     => array('product'),
+		  'post_status'   => array('publish'),
+		  'posts_per_page'=>  -1,
+		  'fields'        => 'ids'
+		);
+	}
 
     if($updated_at_min){
       $args['date_query'][] = array(
