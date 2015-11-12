@@ -189,10 +189,10 @@ class WC_POS_Template {
         'label'  => __( 'Support', 'woocommerce' ),
         'href'   => '#support'
       ),
-	  'stores' => array(
+	  'productCategory' => array(
         /* translators: woocommerce */
-        'label'  => __( 'Stores', 'woocommerce' ),
-        'href'   => '#stores'
+        'label'  => __( 'Product Category', 'woocommerce' ),
+        'href'   => '#productCategory'
       )
     );
 
