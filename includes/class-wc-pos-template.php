@@ -107,8 +107,8 @@ class WC_POS_Template {
    * Output the footer scripts
    */
   protected function footer() {
-    //
-    $build = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'build' : 'min';
+    //TODO: get 'min' back.
+    $build = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'build' : 'build';
 
     // required scripts
     $scripts = array(

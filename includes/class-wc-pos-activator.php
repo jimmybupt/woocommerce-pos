@@ -132,6 +132,7 @@ class WC_POS_Activator {
     $slug = empty($option) ? 'pos' : $option; // make sure slug is not empty
     add_rewrite_tag('%'. $slug .'%', '([^&]+)');
     add_rewrite_rule('^'. $slug .'/?$','index.php?pos=1','top');
+	add_rewrite_rule('^'.'stores'.'/?$', 'stores.php','top');
   }
 
   /**
@@ -139,8 +140,9 @@ class WC_POS_Activator {
    * shop_manager roles
    */
   private function add_pos_capability(){
+    $post_type_object = get_post_type_object( 'product' );
     $roles = array('administrator', 'shop_manager', 'subscriber');
-    $caps = array('manage_woocommerce_pos', 'access_woocommerce_pos');
+    $caps = array('manage_woocommerce_pos', 'access_woocommerce_pos', $post_type_object->cap->edit_posts, $post_type_object->cap->create_posts, $post_type_object->cap->publish_posts, $post_type_object->cap->edit_published_posts);
     foreach($roles as $slug) :
       $role = get_role($slug);
       if($role) : foreach($caps as $cap) :

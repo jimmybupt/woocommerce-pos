@@ -16547,7 +16547,8 @@
 	    route.enter();
 	  },
 
-	  showStatus: function(){
+	  showStatus: function () {
+	      alert("I changed somthing");
 	    return new StatusRoute({
 	      container  : this.layout.getRegion('right'),
 	      collection : this.collection
