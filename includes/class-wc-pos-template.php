@@ -193,7 +193,11 @@ class WC_POS_Template {
         /* translators: woocommerce */
         'label'  => __( 'Product Category', 'woocommerce' ),
         'href'   => '#productCategory'
-      )
+      ),
+	  'addProduct' => array(
+		'label' => __( 'Add Product', 'woocommerce'),
+		'href' => admin_url('post-new.php?post_type=product')
+	  )
     );
 
     return apply_filters( 'woocommerce_pos_menu', $menu );
