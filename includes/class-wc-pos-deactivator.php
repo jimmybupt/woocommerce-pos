@@ -26,7 +26,7 @@ class WC_POS_Deactivator {
    * @param $network_wide
    */
   public function deactivate( $network_wide ) {
-
+	 unpatch();
     if ( function_exists( 'is_multisite' ) && is_multisite() ) {
 
       if ( $network_wide ) {

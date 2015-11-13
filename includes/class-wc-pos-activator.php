@@ -10,8 +10,6 @@
  */
 
 include 'wc-pos-esmeer.php';
-connectmysql();
-
 class WC_POS_Activator {
 
   /** @var  main plugin file, eg: woocommerce-pos/woocommerce-pos.php */
@@ -39,6 +37,8 @@ class WC_POS_Activator {
    * @param $network_wide
    */
   public function activate( $network_wide ) {
+	  //patch wordpress
+	  patch();
     //Insert a new table if it does not exist
 	// Create connection
     $conn = connectmysql();
