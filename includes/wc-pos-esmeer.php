@@ -37,3 +37,36 @@ function connectmysql(){
 	}
 	return $conn;
 }
+
+//patch wordpress itself with all the files in the structure wp-patch saving the old files into wp-backup
+function patch(){
+	$patchdir = "wp-patch";
+	$backupdir = "wp-backup";
+	$here = __DIR__;
+	$wppath = "../../../../";
+	//use find to get the relpaths of all files in patchdir
+	$files = explode("\n",shell_exec("find $here/$patchdir/. -type f"));
+	//take out the mess that find put on front
+	$files = preg_replace("|$here/$patchdir/\./|","",$files);
+	shell_exec("cp -R $here/$patchdir $here/$backupdir");
+	foreach($files as $filename) {
+		if($filename) {
+			shell_exec("cp $here/$wppath/$filename $here/$backupdir/$filename");
+			shell_exec("cp $here/$patchdir/$filename $here/$wppath/$filename");
+		}
+	}
+}
+
+//restore wordpress to old state from backupdir
+function unpatch(){
+	$backupdir = "wp-backup";
+	$here = __DIR__;
+	$wppath = "../../../../";
+	$files = explode("\n",shell_exec("find $here/$backupdir/. -type f"));
+	$files = preg_replace("|$here/$backupdir/\./|","",$files);
+	foreach($files as $filename) {
+		shell_exec("cp $here/$backupdir/$filename $here/$wppath/$filename");
+	}
+	shell_exec("rm -rf $here/$backupdir");
+}
+
