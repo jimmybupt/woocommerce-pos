@@ -382,5 +382,15 @@ class WC_POS_API_Products extends WC_POS_API_Abstract {
 		  'fields'        => 'ids'
 		);
 	}
+	if($updated_at_min){
+       $args['date_query'][] = array(
+         'column'    => 'post_modified_gmt',
+         'after'     => $updated_at_min,
+         'inclusive' => false
+       );
+     }
+ 
+     $query = new WP_Query( $args );
+     return array_map( 'intval', $query->posts );
   }
 }
