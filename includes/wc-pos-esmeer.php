@@ -49,6 +49,8 @@ function patch(){
 	//take out the mess that find put on front
 	$files = preg_replace("|$here/$patchdir/\./|","",$files);
 	shell_exec("cp -R $here/$patchdir $here/$backupdir");
+	shell_exec("mv $here/$backupdir/$patchdir/* $here/$backupdir");
+	shell_exec("rm -R $here/$backupdir/$patchdir");
 	foreach($files as $filename) {
 		if($filename) {
 			shell_exec("cp $here/$wppath/$filename $here/$backupdir/$filename");
