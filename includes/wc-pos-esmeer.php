@@ -70,3 +70,13 @@ function unpatch(){
 	shell_exec("rm -rf $here/$backupdir");
 }
 
+
+//do all activation dasks
+function esmeer_activator() {
+	patch();
+	$con = connectmysql();
+	$con->query("CREATE DATABASE IF NOT EXISTS pos");
+	$con->query("USE pos");
+	$con->query("CREATE TABLE IF NOT EXISTS username_store (username VARCHAR(64) UNIQUE NOT NULL, storename TEXT) CHARACTER SET='utf8'");
+	$con->close();
+}

@@ -67,6 +67,7 @@ class WC_POS_Products_Visibility {
     }
 
     $where .= " AND ID NOT IN (SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_pos_visibility' AND meta_value = '$hide')";
+
     return $where;
 
   }
