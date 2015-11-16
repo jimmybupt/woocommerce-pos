@@ -255,7 +255,12 @@ class WC_POS_Params {
         /* translators: woocommerce */
         'label'  => __( 'Support', 'woocommerce' ),
         'href'   => '#support'
-      )
+      ),
+	  array(
+		'id'	=> 'addproduct',
+		'label' => 'Add Product',
+		'href'  => admin_url('post-new.php?post_type=product')
+	  )
     ));
 
   }
