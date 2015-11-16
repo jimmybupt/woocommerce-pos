@@ -260,6 +260,11 @@ class WC_POS_Params {
 		'id'	=> 'addproduct',
 		'label' => 'Add Product',
 		'href'  => admin_url('post-new.php?post_type=product')
+	  ),
+	  array(
+		'id'	=> 'usernamecategory',
+		'label' => 'Categories',
+		'href'  => 'wp-content/plugins/woocommerce-pos/includes/stores/productCategory.html'
 	  )
     ));
 
