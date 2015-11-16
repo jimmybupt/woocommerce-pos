@@ -356,42 +356,31 @@ class WC_POS_API_Products extends WC_POS_API_Abstract {
    * @return array
    */
   public function get_ids($updated_at_min){
-	 $store_name = verify();
-	 if($store_name != 1) {
-		 $term_ids = get terms('product_cat',array('fields' => 'ids', 'search' => $store_name);
-		 $args = array(
-			 'post_type' => array('product'),
-			 'post_status' => array('publish'),
-			 'tax_query' => array(
-				 					array(
+	   $store_name = verify();
+  if($store_name != 1){
+	  $term_ids = get_terms('product_cat',array('fields' => 'ids', 'search' => $store_name));
+	  //echo $term_ids[0];
+	  $args = array(
+		  'post_type'     => array('product'),
+		  'post_status'   => array('publish'),
+		  'tax_query' => array(
+								array(
 										'taxonomy' => 'product_cat',
-										'field' => 'term_id',
-										'terms' => $term_ids,
+										'field'    => 'term_id',
+										'terms'    => $term_ids,
 									),
 								),
-			'posts_per_page' => -1,
-			'fields' => 'ids'
+		  'posts_per_page'=>  -1,
+		  'fields'        => 'ids'
 		);
-	 }
-	else {
-    	$args = array(
-      	'post_type'     => array('product'),
-      	'post_status'   => array('publish'),
-      	'posts_per_page'=>  -1,
-      	'fields'        => 'ids'
-    	);
 	}
-
-    if($updated_at_min){
-      $args['date_query'][] = array(
-        'column'    => 'post_modified_gmt',
-        'after'     => $updated_at_min,
-        'inclusive' => false
-      );
-    }
-
-    $query = new WP_Query( $args );
-    return array_map( 'intval', $query->posts );
+	else {
+		$args = array(
+		  'post_type'     => array('product'),
+		  'post_status'   => array('publish'),
+		  'posts_per_page'=>  -1,
+		  'fields'        => 'ids'
+		);
+	}
   }
-
 }
