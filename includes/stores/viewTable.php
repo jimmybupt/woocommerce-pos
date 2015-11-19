@@ -18,15 +18,10 @@ th {text-align: left;}
 <body>
 
 <?php
-
-
-$con = mysqli_connect('localhost','root','root','pos');
-if (!$con) {
-    die('Could not connect: ' . mysqli_error($con));
+if(!file_exists("pc.dat")) {
+	shell_exec("touch pc.dat");
 }
-
-$sql="SELECT * FROM username_store";
-$result = mysqli_query($con,$sql);
+$h = fopen("pc.dat","r");
 
 echo "<table>
 <tr>
@@ -34,14 +29,17 @@ echo "<table>
 <th>Product Category</th>
 
 </tr>";
-while($row = mysqli_fetch_array($result)) {
-    echo "<tr>";
-    echo "<td>" . $row['username'] . "</td>";
-    echo "<td>" . $row['storename'] . "</td>";
-    echo "</tr>";
+while($line = fgets($h)) {
+	$words = explode(',',$line);
+	if(count($words) == 2) {
+    	echo "<tr>";
+    	echo "<td>" . $words[0] . "</td>";
+    	echo "<td>" . $words[1] . "</td>";
+	 	echo "</tr>";
+	}
 }
 echo "</table>";
-mysqli_close($con);
+fclose($h);
 ?>
 </body>
 </html>

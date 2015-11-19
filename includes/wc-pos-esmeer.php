@@ -2,41 +2,26 @@
 
 /*
 Functions for Esmeer customizations to WooPOS
-*/
+ */
 
-function verify(){
+function verify() {
 	$current_user = wp_get_current_user();
-	$dbname = "pos";
-	// Create connection
-	$conn = connectmysql();
-	$conn->query("USE " . $dbname);
+	if($current_user->user_level == 10) {
+		return 1;//if they're an admin don't bother with lookup
+	}
 
-	$sql = "SELECT storename FROM username_store WHERE username = '" . $current_user->user_login . "'";
-	$result = $conn->query($sql);
-	$row = $result->fetch_row();
-	$conn->close();
-	
-	if( count($row)>=1){
-		return $row[0];
-	}
-	if($current_user->user_level == 10){
-		return 1;
-	}
-	else{
+	$data = __DIR__ . "/stores/pc.dat";
+	if(!file_exists($data)) {
 		return -1;
 	}
+
+	$result = strstr(shell_exec("grep $current_user $here/stores/pc.dat"),',');//look them up in table, keep the category info
+	if($result) {
+		return substr($result,1); //remove leading comma
+	}
+	return -1;
 }
 
-function connectmysql(){
-	$servername = "localhost";
-	$username = "root"; //this should change later
-	$password = "root"; //this too
-	$conn = new mysqli($servername, $username, $password);
-	if($conn->connect_error) {
-		die("Couldn't connect to MySQL: " . $conn->connect_error);
-	}
-	return $conn;
-}
 
 //patch wordpress itself with all the files in the structure wp-patch saving the old files into wp-backup
 function patch(){
@@ -73,12 +58,7 @@ function unpatch(){
 }
 
 
-//do all activation dasks
+//do all activation tasks
 function esmeer_activator() {
 	patch();
-	$con = connectmysql();
-	$con->query("CREATE DATABASE IF NOT EXISTS pos");
-	$con->query("USE pos");
-	$con->query("CREATE TABLE IF NOT EXISTS username_store (username VARCHAR(64) UNIQUE NOT NULL, storename TEXT) CHARACTER SET='utf8'");
-	$con->close();
 }
