@@ -1,20 +1,19 @@
 <?php
 
 /**
- * Plugin Name:       WooCommerce POS
- * Plugin URI:        https://wordpress.org/plugins/woocommerce-pos/
+ * Plugin Name:       WooCommerce POS - Esmeer Fork
  * Description:       A simple front-end for taking WooCommerce orders at the Point of Sale. Requires <a href="http://wordpress.org/plugins/woocommerce/">WooCommerce</a>.
  * Version:           0.4.5
- * Author:            kilbot
- * Author URI:        http://woopos.com.au
+ * Author:            Esmeer
+ * Author URI:        http://www.esmeer.com
  * Text Domain:       woocommerce-pos
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path:       /languages
  *
  * @package   WooCommerce POS
- * @author    Paul Kilmurray <paul@kilbot.com.au>
- * @link      http://woopos.com.au
+ * @author    Esmeer
+ * @link      http://www.esmeer.com
  *
  */
 
