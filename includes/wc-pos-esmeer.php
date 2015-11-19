@@ -15,9 +15,9 @@ function verify() {
 		return -1;
 	}
 
-	$result = strstr(shell_exec("grep $current_user $here/stores/pc.dat"),',');//look them up in table, keep the category info
-	if($result) {
-		return substr($result,1); //remove leading comma
+	$result = strstr(shell_exec("grep $current_user->user_login $data"),',');//look them up in table, keep the category info
+	if($result = substr($result,1,-1)) {
+		return $result; //remove leading comma
 	}
 	return -1;
 }

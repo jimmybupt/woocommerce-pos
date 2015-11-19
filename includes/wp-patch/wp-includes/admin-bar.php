@@ -620,7 +620,11 @@ function wp_admin_bar_edit_menu( $wp_admin_bar ) {
  */
 function wp_admin_bar_new_content_menu( $wp_admin_bar ) {
 	$actions = array();
-
+  
+  require_once(ABSPATH . 'wp-content/plugins/woocommerce-pos/includes/wc-pos-esmeer.php');
+  $v = verify();
+  if ($v != 1) return;
+  
 	$cpts = (array) get_post_types( array( 'show_in_admin_bar' => true ), 'objects' );
 
 	if ( isset( $cpts['post'] ) && current_user_can( $cpts['post']->cap->create_posts ) )
