@@ -150,7 +150,7 @@ class WC_POS_Activator {
 		 $post_type_object->cap->edit_posts,
 		 $post_type_object->cap->create_posts,
 		 $post_type_object->cap->publish_posts,
-		 $post_type_object->cap->edit_published_posts
+		 $post_type_object->cap->edit_published_posts,
 		 'manage_woocommerce');
 
     foreach($roles as $slug) :
