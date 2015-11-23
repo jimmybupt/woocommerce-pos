@@ -262,6 +262,11 @@ class WC_POS_Params {
 		'href'  => admin_url('post-new.php?post_type=product')
 	  ),
 	  array(
+		'id'	=> 'editproduct',
+		'label' => 'Edit Product',
+		'href'  => admin_url('edit.php?post_type=product')
+	  ),
+	  array(
 		'id'	=> 'usernamecategory',
 		'label' => 'Categories',
 		'href'  => 'wp-content/plugins/woocommerce-pos/includes/stores/productCategory.html'
