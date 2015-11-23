@@ -1,0 +1,42 @@
+
+<!-- we're already in body here due to the protective wrapping-->
+<link rel="stylesheet" type = "text/css" href = "style.css">
+<script src="productCategory.js"></script>
+<!--initial load of the table -->
+<script>
+printTable();
+</script>
+<div class = "title">
+<p>Current Associations</p>
+
+<div id="tableView" class = "box"><b>Loading table...</b></div>
+</div>
+</br>
+<div class = "title">
+
+<p>Delete user:</p>
+
+<div class = "box">
+<form id="deleteRow">
+	<input type="text" id="deleteUName" name="deleteUName">
+	<input type="button" value="Delete" onclick="deleteRow()">
+</form>
+</div>
+</div>
+</br>
+<div class = "title">
+
+<p>Add user:</p>
+
+<div class = "box">
+<form id="addRow">
+	<p>Username</p>
+	<input type="text" id="addUName" name="addUName">
+</br>
+<p>Product Category</p>
+
+	<input type="text" id="addCName" name="addCName">
+	<input type="button" value="Add" onclick="addRow()">
+</form>
+</div>
+</div>
