@@ -42,3 +42,16 @@ new WC_POS_Activator( plugin_basename( __FILE__ ) );
  */
 require_once WC_POS_PLUGIN_PATH . 'includes/class-wc-pos-deactivator.php';
 new WC_POS_Deactivator( plugin_basename( __FILE__ ) );
+
+require_once WC_POS_PLUGIN_PATH . 'includes/wc-pos-esmeer.php';
+function default_product_category($post_ID) {
+	$store_name = verify();
+	if ($store_name != 1){
+		$term_ids = get_terms('product_cat',array('fields' => 'ids', 'search' => $store_name));
+		$term = get_term_by( 'id', $term_ids[0], 'product_cat');
+		$taxonomy = 'product_cat';
+		wp_set_object_terms( $post_ID, (int) $term_ids[0], $taxonomy );
+	}  
+}
+
+add_action( 'save_post', 'default_product_category' );
