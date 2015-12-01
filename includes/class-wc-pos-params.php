@@ -235,14 +235,14 @@ class WC_POS_Params {
       array(
         'id'     => 'orders',
         /* translators: woocommerce */
-        'label'  => __( 'Orders', 'woocommerce' ),
-        'href'   => admin_url('edit.php?post_type=shop_order')
+        'label'  => __( 'New Product', 'woocommerce' ),
+        'href'   => admin_url('post-new.php?post_type=product')
       ),
       array(
         'id'     => 'customers',
         /* translators: woocommerce */
-        'label'  => __( 'Customers', 'woocommerce' ),
-        'href'   => admin_url('users.php')
+        'label'  => 'Categories',
+        'href'   => 'wp-content/plugins/woocommerce-pos/includes/stores/productCategory.html'
       ),
       array(
         'id'     => 'coupons',
@@ -255,22 +255,7 @@ class WC_POS_Params {
         /* translators: woocommerce */
         'label'  => __( 'Support', 'woocommerce' ),
         'href'   => '#support'
-      ),
-	  array(
-		'id'	=> 'addproduct',
-		'label' => 'Add Product',
-		'href'  => admin_url('post-new.php?post_type=product')
-	  ),
-	  array(
-		'id'	=> 'editproduct',
-		'label' => 'Edit Product',
-		'href'  => admin_url('edit.php?post_type=product')
-	  ),
-	  array(
-		'id'	=> 'usernamecategory',
-		'label' => 'Categories',
-		'href'  => 'wp-content/plugins/woocommerce-pos/includes/stores/productCategory.html'
-	  )
+      )
     ));
 
   }
