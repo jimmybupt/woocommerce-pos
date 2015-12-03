@@ -242,7 +242,7 @@ class WC_POS_Params {
         'id'     => 'customers',
         /* translators: woocommerce */
         'label'  => 'Categories',
-        'href'   => 'wp-content/plugins/woocommerce-pos/includes/stores/productCategory.html'
+        'href'   => 'wp-content/plugins/woocommerce-pos/includes/stores/productCategory.php'
       ),
       array(
         'id'     => 'coupons',
