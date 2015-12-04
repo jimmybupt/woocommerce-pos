@@ -9,6 +9,18 @@
 <?php
 require_once('../../../../../wp-config.php');
 if(wp_get_current_user()->user_level == 10) {
+	if(isset($_GET["addUName"]) && isset($_GET["addCName"]) ){
+		$uname = escapeshellcmd($_GET["addUName"]);
+		$cname = $_GET["addCName"];
+		if(!shell_exec("grep $uname, pc.dat")) {
+			file_put_contents("pc.dat","$uname,$cname\n",FILE_APPEND);
+		}
+	}
+	if( isset($_GET["deleteUName"])){
+		$uname = $_GET['deleteUName'];
+		$uname = escapeshellcmd($uname);
+		shell_exec("sed -i '/$uname/d' pc.dat");
+	}
 	//print real page
 	echo "<div class = \"title\">
 <p>Current Associations</p>";
@@ -57,9 +69,9 @@ echo"</br>
 <p>Delete user:</p>
 
 <div class = \"box\">
-<form id=\"deleteRow\">
+<form id=\"deleteRow\" action=\"$PHP_SELF \" method=\"GET\">
 	<input type=\"text\" id=\"deleteUName\" name=\"deleteUName\">
-	<input type=\"button\" value=\"Delete\" onclick=\"deleteRow()\">
+	<input type=\"submit\" value=\"Delete\">
 </form>
 </div>
 </div>
@@ -69,14 +81,14 @@ echo"</br>
 <p>Add user:</p>
 
 <div class = \"box\">
-<form id=\"addRow\">
+<form id=\"addRow\" action=\"$PHP_SELF \" method=\"GET\">
 	<p>Username</p>
 	<input type=\"text\" id=\"addUName\" name=\"addUName\">
 </br>
 <p>Product Category</p>
 
 	<input type=\"text\" id=\"addCName\" name=\"addCName\">
-	<input type=\"button\" value=\"Add\" onclick=\"addRow()\">
+	<input type=\"submit\" value=\"Add\">
 </form>
 </div>
 </div>";
