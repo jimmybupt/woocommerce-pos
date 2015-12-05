@@ -1,0 +1,42 @@
+Versions
+	Wordpress Version: 4.3.1
+	Woocommerce Version: 2.4.10
+	Woocommerce-POS version forked: 0.4.5
+
+Compilation/Testing
+	All testing was done on VaryingVagrantVagrants.
+	Additionally, we had a number of issues with the compilation that could only be resolved (for us) on Arch Linux. The upstream developer compiles using some other linux system entirely.
+	Because our edits did not involve any of the upstream javascript, html, or css, we did not need to add our changes to the system before compile time. 
+		Thus we simply compiled the system and then placed our changes onto the compiled unit.
+	Our modifications to the system were restricted to changing its php and adding entirely new files, and the locations and purposes of these edits follow.
+
+Files Edited:
+	woocommerce-pos.php
+		added a function defalt_product_category that forcibly sets the product categories of items that non admins add to the correct product category for their store and hooked it to save_post.
+
+	includes/api/class-wc-pos-products.php
+		added logic to the function get_ids to filter the products and only give back the ids of the products the current user should actually be able to see.
+		there may be other places in the code that this logic could have instead been placed.
+
+	includes/class-wc-pos-params.php
+		Added our pages to the filters at the bottom and removed pages not really existant in this version
+
+	includes/class-wc-pos-activator.php
+		call patch() (from wc-pos-esmeer.php) at activation time.
+		give subscribers appropriate roles
+
+	includes/class-wc-pos-deactivator.php
+		call unpatch() at deactivation time
+
+Files Created:
+	Everything in the includes/stores folder
+		A page to allow admins to add users to the user to product category table (which we keep as a plaintext file inside of the stores folder
+			The table we create and work with relies on the ability to call shell_exec from php and relies on write access to the table itself.
+
+	Everything in the includes/wp-patch (which are edits of Wordpress 4.3.1 files)
+		Patches to allow nonprivileged users to acces certain bits of privileged wordpress functionality under certain conditions with restrictions (to add and edit products)
+
+	includes/wc-pos-esmeer.php
+		A function called verify() that checks if a user is admin or in the store table and returns either the value 1 if they are admin the category if they are in that table, or -1 if they are neither in the table nor admin
+		A set of functions to patch wordpress's files with our edits to the wordpress files at activator time and unpatch those files at deactivator time.
+			This relies on the ability to call shell_exec from php and relies on write access to the above wordpress folder.	
