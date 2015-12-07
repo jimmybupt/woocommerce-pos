@@ -145,6 +145,8 @@ class WC_POS_Activator {
 	 $post_type_object = get_post_type_object( 'product' ); 
     $roles = array('administrator', 'shop_manager','subscriber');
 	 $caps = array(
+		 'publish_shop_orders',
+		 'read_private_shop_orders',
 		 'manage_woocommerce_pos',
 		 'access_woocommerce_pos', 
 		 $post_type_object->cap->edit_posts,
